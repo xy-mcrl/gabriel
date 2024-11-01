@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Paciente</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Cadastro de Paciente</h2>
+    <form id="patientForm">
+        <label for="patientName">Nome:</label>
+        <input type="text" id="patientName" required>
+
+        <label for="patientAge">Idade:</label>
+        <input type="number" id="patientAge" required>
+
+        <label for="patientCondition">Condição Médica:</label>
+        <textarea id="patientCondition" required></textarea>
+
+        <button type="submit">Registrar Paciente</button>
+        <button type="button" onclick="window.location.href='main.html'">Voltar</button>
+    </form>
+
+    <script>
+        document.getElementById("patientForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Captura os dados do formulário
+            const patientName = document.getElementById("patientName").value;
+            const patientAge = document.getElementById("patientAge").value;
+            const patientCondition = document.getElementById("patientCondition").value;
+
+            // Cria um objeto paciente
+            const patient = {
+                name: patientName,
+                age: patientAge,
+                condition: patientCondition
+            };
+
+            // Obtém a lista de pacientes já salvos ou cria uma nova lista
+            let patients = JSON.parse(localStorage.getItem("patients")) || [];
+
+            // Adiciona o novo paciente à lista
+            patients.push(patient);
+
+            // Salva a lista atualizada no Local Storage
+            localStorage.setItem("patients", JSON.stringify(patients));
+
+            // Exibe mensagem de sucesso
+            alert("Paciente registrado com sucesso!");
+
+            // Limpa o formulário para que o usuário possa cadastrar outro paciente
+            document.getElementById("patientForm").reset();
+        });
+    </script>
+</body>
+</html>

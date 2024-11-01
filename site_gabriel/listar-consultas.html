@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Consultas</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos básicos para a tabela */
+        #appointments {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        #appointments th, #appointments td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        #appointments th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #appointments tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Consultas Agendadas</h2>
+    
+    <!-- Tabela para exibir consultas -->
+    <table id="appointments">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Hora</th>
+                <th>Médico</th>
+            </tr>
+        </thead>
+        <tbody id="appointmentList"></tbody>
+    </table>
+
+    <button onclick="window.location.href='painel-paciente.html'">Voltar</button>
+
+    <script>
+        const appointmentList = document.getElementById("appointmentList");
+
+        // Função para exibir as consultas
+        function displayAppointments() {
+            // Limpa a tabela para evitar duplicação
+            appointmentList.innerHTML = "";
+
+            // Obtém as consultas salvas no Local Storage
+            const appointments = JSON.parse(localStorage.getItem("appointments")) || [];
+
+            // Exibe cada consulta agendada na tabela
+            appointments.forEach((appointment) => {
+                const row = document.createElement("tr");
+                
+                const dateCell = document.createElement("td");
+                dateCell.textContent = appointment.date;
+                
+                const timeCell = document.createElement("td");
+                timeCell.textContent = appointment.time;
+                
+                const doctorCell = document.createElement("td");
+                doctorCell.textContent = appointment.doctor;
+
+                row.appendChild(dateCell);
+                row.appendChild(timeCell);
+                row.appendChild(doctorCell);
+                appointmentList.appendChild(row);
+            });
+        }
+
+        // Exibe as consultas ao carregar a página
+        displayAppointments();
+
+        // Função para agendar uma nova consulta e atualizar a lista em tempo real
+        function addAppointment(date, time, doctor) {
+            const appointment = { date, time, doctor };
+
+            // Obtém as consultas salvas ou cria uma nova lista de consultas
+            let appointments = JSON.parse(localStorage.getItem("appointments")) || [];
+            appointments.push(appointment);
+
+            // Salva a lista atualizada no Local Storage
+            localStorage.setItem("appointments", JSON.stringify(appointments));
+
+            // Exibe a nova consulta na tabela imediatamente
+            displayAppointments();
+        }
+    </script>
+</body>
+</html>
+ 

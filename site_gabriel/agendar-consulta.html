@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Consulta</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Agendar Consulta</h2>
+    <form id="appointmentForm">
+        <label for="patient">Paciente:</label>
+        <select id="patient" required>
+            <option value="">Selecione o paciente</option>
+            <!-- As opções dos pacientes serão adicionadas aqui -->
+        </select>
+
+        <label for="appointmentDate">Data:</label>
+        <input type="date" id="appointmentDate" required>
+
+        <label for="appointmentTime">Hora:</label>
+        <input type="time" id="appointmentTime" required>
+
+        <label for="doctor">Médico:</label>
+        <select id="doctor" required>
+            <option value="">Selecione o médico</option>
+            <option value="Dr. Silva">Dr. Silva</option>
+            <option value="Dra. Souza">Dra. Souza</option>
+            <option value="Dr. Oliveira">Dr. Oliveira</option>
+            <option value="Dra. Mendes">Dra. Mendes</option>
+        </select>
+
+        <button type="submit">Agendar</button>
+        <button type="button" onclick="window.location.href='main.html'">Voltar</button>
+    </form>
+
+    <script>
+        // Função para carregar os pacientes cadastrados do Local Storage
+        function loadPatients() {
+            let patients = JSON.parse(localStorage.getItem("patients")) || [];
+            const patientSelect = document.getElementById("patient");
+
+            patients.forEach(patient => {
+                const option = document.createElement("option");
+                option.value = patient.name; // Supondo que o objeto paciente tem uma propriedade 'name'
+                option.textContent = patient.name;
+                patientSelect.appendChild(option);
+            });
+        }
+
+        // Carrega os pacientes quando a página é carregada
+        window.onload = loadPatients;
+
+        document.getElementById("appointmentForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Captura os dados do formulário
+            const patient = document.getElementById("patient").value;
+            const appointmentDate = document.getElementById("appointmentDate").value;
+            const appointmentTime = document.getElementById("appointmentTime").value;
+            const doctor = document.getElementById("doctor").value;
+
+            // Cria um objeto consulta
+            const appointment = {
+                patient: patient,
+                date: appointmentDate,
+                time: appointmentTime,
+                doctor: doctor
+            };
+
+            // Obtém as consultas salvas ou cria uma nova lista de consultas
+            let appointments = JSON.parse(localStorage.getItem("appointments")) || [];
+
+            // Adiciona a nova consulta à lista
+            appointments.push(appointment);
+
+            // Salva a lista atualizada no Local Storage
+            localStorage.setItem("appointments", JSON.stringify(appointments));
+
+            // Exibe mensagem de sucesso
+            alert("Consulta agendada com sucesso!");
+
+            // Limpa o formulário para que o usuário possa agendar outra consulta
+            document.getElementById("appointmentForm").reset();
+        });
+    </script>
+</body>
+</html>

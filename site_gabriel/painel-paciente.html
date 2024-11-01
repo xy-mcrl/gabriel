@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Paciente</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos gerais */
+        body {
+            display: flex;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        .drawer {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            background-color: #0275d8; /* Cor de fundo do drawer */
+            color: white; /* Cor do texto */
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .drawer h2 {
+            color: #fff; /* Cor do título */
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .drawer button {
+            display: block;
+            margin: 10px 0;
+            background: #5bc0de; /* Cor dos botões */
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s; /* Transição suave para o hover */
+        }
+
+        .drawer button:hover {
+            background: #31b0d5; /* Cor dos botões no hover */
+        }
+
+        .content {
+            margin-left: 270px; /* Margem para evitar sobreposição com o drawer */
+            padding: 20px;
+            flex-grow: 1;
+            background-image: url('image/SENAMED.png'); /* Adicione a imagem de fundo aqui */
+            background-size: cover; /* Cobre toda a área */
+            background-position: center; /* Centraliza a imagem */
+            min-height: 100vh; /* Altura mínima para cobrir a tela */
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1); /* Sombra interna no conteúdo */
+            color: white; /* Cor do texto dentro do conteúdo */
+        }
+
+        h2 {
+            color: #333; /* Cor do texto do cabeçalho */
+        }
+    </style>
+</head>
+<body>
+    <div class="drawer" id="drawer">
+        <h2>Menu do Paciente</h2>
+        <button onclick="window.location.href='listar-consultas.html'">Listar Consultas</button>
+        <button onclick="window.location.href='historico-medico.html'">Ver Histórico Médico</button>
+        <button onclick="window.location.href='index.html'">Sair</button>
+    </div>
+
+    <div class="content">
+        <h2>Painel do Paciente</h2>
+        <p>Bem-vindo(a) ao painel do paciente! Aqui você pode visualizar suas consultas e seu histórico médico.</p>
+    </div>
+
+    <script>
+        // Script para funcionalidades adicionais se necessário
+    </script>
+</body>
+</html>

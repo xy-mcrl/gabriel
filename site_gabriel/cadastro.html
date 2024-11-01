@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Saúde - Cadastro</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos gerais */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('image/SENAMED2.png'); /* Caminho para a imagem de fundo */
+            background-size: cover; /* Faz a imagem cobrir toda a tela */
+            background-position: center; /* Centraliza a imagem */
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        /* Container do formulário */
+        #register-container {
+            background-color: rgba(255, 255, 255, 0.9); /* Fundo branco semi-transparente */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px; /* Ajuste a largura do formulário conforme necessário */
+            text-align: center;
+        }
+
+        /* Estilo do cabeçalho */
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        /* Estilo dos rótulos e campos de entrada */
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            text-align: left;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Estilos dos botões */
+        button {
+            background-color: #0275d8;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilo para o botão de voltar */
+        button[type="button"] {
+            background-color: #5cb85c;
+        }
+
+        button[type="button"]:hover {
+            background-color: #4cae4c;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="register-container">
+        <h2>Cadastro de Usuário</h2>
+        <form id="register-form" onsubmit="handleRegister(event)">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+
+            <label for="password">Senha:</label>
+            <input type="password" id="password" required>
+
+            <button type="submit">Cadastrar</button>
+            <button type="button" onclick="window.location.href='index.html'">Voltar para Login</button>
+        </form>
+    </div>
+
+    <script>
+        function handleRegister(event) {
+            event.preventDefault(); // Evita o envio padrão do formulário
+
+            // Aqui você pode implementar a lógica para salvar os dados do usuário
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Exemplo de como armazenar dados no Local Storage (apenas para demonstração)
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            users.push({ name, email, password });
+            localStorage.setItem('users', JSON.stringify(users));
+
+            // Redirecionar para a tela de login após o cadastro
+            alert('Cadastro realizado com sucesso! Faça login.');
+            window.location.href = 'index.html'; // Redireciona para a tela de login
+        }
+    </script>
+</body>
+</html>
